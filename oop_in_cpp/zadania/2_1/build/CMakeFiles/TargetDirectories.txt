@@ -1,3 +1,0 @@
-/home/mj/priv_workspace/szkola/oop_in_cpp/zadania/2_1/build/CMakeFiles/rebuild_cache.dir
-/home/mj/priv_workspace/szkola/oop_in_cpp/zadania/2_1/build/CMakeFiles/edit_cache.dir
-/home/mj/priv_workspace/szkola/oop_in_cpp/zadania/2_1/build/CMakeFiles/main.dir
