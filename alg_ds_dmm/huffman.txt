@@ -1,0 +1,52 @@
+Opis algorytmu Huffmana
+
+[węzeł/liść/element wektora to obiekt struktury/klasy ] :
+struct cNode { 
+
+	cNode *lNode = NULL, *rNode = NULL;
+	int value =0;
+	int sum =0;
+	char sign = '';
+};
+
+1. wczytanie danych wejściowych do zmiennej S;
+2. zliczenie ilości wystąpień znaków w danych wejściowych ( utworzenie liść drzewa ) i umieszczenie ich w wektorze;
+	2.1 int a = s.length 
+	2.2 jeżeli a == 0  to krok 10,  w przeciwnym razie krok 2.3
+	2.3 ustaw int licznik=0 ;
+	2.4 pobierz (kolejny) znak z danych wejściowych :char znak=s[licznik];
+	2.5 sprawdź czy wektor zawiera już element (węzeł), który w polu sign ma pisaną wartość równą wartości znak 
+	2.6 jeżeli wektor posiada już taki element, to zwiększ w tym elemencie/węźle wartość zmiennej sum o 1  
+		w przeciwnym razie utwórz nowy obiekt węzła cNode i dodaj go do wektora ustawiając wertość zmiennej sum na 1 i przypisując do pola sign wartość ze zmeinnej znak;
+	2.7 zwiększ licznik o 1;
+	2.8 dopóki licznik!=a przejdź do kroku 2.4;
+3. przypisanie zmiennej iloscLisci wartości długości wektora;
+
+4. dopóki długość wektora jest większa od 1 w przeciwnym razie przejście do kroku 5.
+	4.1 sortowanie wektora po wartości ilości wystąpień od największej do najmniejszej;
+	4.2 pobranie z wektora ostatniego elementu (liść) v1=v[d-1] - o najmniejszej wartości zmiennej sum (wystąpień w danych wejściowych); // pobranie ostatniego elementu jest równoznaczne z jego usunięciem z wektora;
+	4.3 przypisanie temu węzłowi (v1) zmiennej value wartości 0;
+	4.4 pobranie z wektora ostatniego elementu (liść) v2=v[d-1] - o najmniejszej wartości zmiennej sum (wystąpień w danych wejściowych); // pobranie ostatniego elementu jest równoznaczne z jego usunięciem z wektora;
+	4.5 przypisanie temu węzłowi (v2) zmiennej value wartości 1;
+	4.6 utworzenie nowego węzła vN o wartości zmiennej sum równej sumie ilości wystąpień w węzłach v1, v2.
+	4.7 przypisanie do vN.lNode wskaźnika na węzeł v1 a do vN.rNode wskaźnika do v2;
+	4.8 dodanie utworzonego węzła vN do wektora;
+	4.9 przejście do kroku 4;
+5. węzeł znajdujący się w wektor[0] jest korzeniem drzewa zawierającego kodowania dla poszczególnych znaków z pliku wejściowego;
+6. utworzenie dwóch tablic o wymiarach iloscLisci:  jedna T1 do przechowywania znaku (z zakresu znaków  wczytanych z danych wejściowych) 
+													oraz druga T2 do przechowywania kodów masek binarnych zczytanych z utowrzonego drzewa kodów dla tych znaków;
+7. rekurencyjne przejście po węzłach drzewa od korzenia do liści (korzeń zawiera informacje o swoich dzieciach (lNode i rNode) 
+    czytając kolejne wartości ze zmiennej value każdego węzła, które w liściu utworzą niepowtarzalny ciąg (0 i 1) dla danego liścia.
+	Informacją dla zakończenia przeszukiwania ścieżki drzewa jest to, że każdy liść ma ustawioną wartość wskaźników lNode i rNode na  NULL;
+	W liściu należy zapisać do kolejnego pola tablicy T1 wartość ze zmiennej sign  a do T2 ( na tym samym indeksie tablicy co T1) wartość kodu z pól value każdego mijanego wcześniej od korzenia;
+8. ustaw licnik na 0;
+9. przygotowanie wynikowych danych : dopóki licznik<a 
+	8.1 pobierz (kolejny) znak z danych wejściowych s : char znak=s[licznik];
+	8.2 znajdz znak w tablicy T1 i pobierz indeks i1 tego elementu T1;
+	8.3 pobierz kod z elementu tabeli T2 o indeksie i1;
+	8.4 pisz do danych wyściowych kod znaku;
+10 KONIEC
+
+
+Aby zobrazować działanie kodowania Huffmana do danych wynikowych można pisać kody zczytane z drzewa jako ciąg 0 i 1 (każdy jako osobny znak 4 bajtowy - plik wynikowy na pewno nie będzie mniejszy niż wejściowy...).
+W rzeczywistości pole value w klasie powinno być typu Bit (ew. bool) i finalnie zastosowane operacje bitowe na tworzonych bajtach, co da w rezultacie mniejszy rozmiar pliku.
